@@ -3,21 +3,6 @@
 
 
 
-#' onError
-#'
-#' @param err err
-#' @param functionName functionName
-#' @param step step
-#' @export
-onError<-function(err, functionName, step)
-
-{
-  message_traceback <- err$message
-  errormessage = paste(paste("at ", functionName, " :: ",
-                             step, sep = ""), message_traceback, sep = "\n")
-  stop(errormessage, call. = FALSE)
-}
-
 
 #' getHistory
 #' @export
@@ -94,3 +79,20 @@ createRepasAliment <- function(name, quantity,repasType){
   }, error = function(err) onError(err,functionName,step ))
 }
 
+
+#' createSelectAlimentList
+#' @importFrom rlist  list.append
+#' @export
+createSelectAlimentList <- function(){
+  functionName<-match.call()[[1]]
+  step<-"Start"
+  tryCatch({
+    ciqual = getCiqualDataBase()
+    list = list();
+    for (row in 1:dim(ciqual)[1]){
+      list = list.append(list,ciqual[row,'alim_code'])
+    }
+    names(list)= ciqual$alim_nom_fr
+  return(list)
+  }, error = function(err) onError(err,functionName,step ))
+}

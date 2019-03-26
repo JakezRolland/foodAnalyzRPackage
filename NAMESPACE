@@ -2,6 +2,7 @@
 
 export(addRepasAliment)
 export(createRepasAliment)
+export(createSelectAlimentList)
 export(getCiqualDataBase)
 export(getCurrentRVersion)
 export(getHistory)
@@ -12,4 +13,5 @@ export(libraryGitHubPackage)
 export(libraryPackages)
 export(onError)
 import(devtools)
+importFrom(rlist,list.append)
 importFrom(withr,with_libpaths)
