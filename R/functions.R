@@ -20,7 +20,6 @@ onError<-function(err, functionName, step)
 
 
 #' getHistory
-#' @importFrom xlsx
 #' @export
 getHistory<-function()
 {
@@ -94,10 +93,3 @@ createRepasAliment <- function(name, quantity,repasType){
   }, error = function(err) onError(err,functionName,step ))
 }
 
-data.frame(ALIMENT=toupper(input$newAliment),POIDS=input$gr,KCAL=input$kcal,PROTEINE=input$proteine,
-           LIPIDE=input$lipide,GLUCIDE=input$glucide)
-
-aliments <<- rbind(aliments,data.frame(ALIMENT=toupper(input$newAliment),POIDS=input$gr,KCAL=input$kcal,PROTEINE=input$proteine,
-                                       LIPIDE=input$lipide,GLUCIDE=input$glucide))
-updateSelectInput(session,'ligne' , '',
-                  choices = unique(aliments$ALIMENT))
