@@ -31,7 +31,8 @@ getHistory<-function()
     if(file.exists("REPAS.rds")){
       repasData<-readRDS("REPAS.rds");
     }else {
-      repasData<-data.frame();
+      init = createRepasAliment("test","test","test");
+      repasData<-init[0,]
     }
     return(repasData)
   }, error = function(err) onError(err,functionName,step ))
@@ -72,7 +73,7 @@ addRepasAliment <- function(history,aliment){
   tryCatch({
     history <- rbind(history,aliment);
     saveRDS(history,"REPAS.rds");
-    return(aliments)
+    return(history)
   }, error = function(err) onError(err,functionName,step ))
 }
 
